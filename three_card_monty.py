@@ -10,13 +10,16 @@ import random
 
 
 def clear_screen():
+    """Clears the screen."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def pause(seconds):
+    """Pause for the number of seconds specified as argument."""
     time.sleep(seconds)
 
 def print_player_money(player_money):
+    """Display the amount of dollars the player currently has."""
     print(f"""
 
 ===========================
@@ -26,6 +29,7 @@ def print_player_money(player_money):
     """)
 
 def ascii_cards(card_display_list):
+    """Prints to screen three ascii art cards, face up."""
     clear_screen()
     print("""
    ___    ___    ___
@@ -36,6 +40,18 @@ def ascii_cards(card_display_list):
     """.format(card_display_list[0], card_display_list[1], card_display_list[2], card_display_list[0], card_display_list[1], card_display_list[2]))
 
 def ascii_cards_backs():
+    """Prints to screen three ascii art cards, face down.
+
+    >>>ascii_cards_backs()
+   ___    ___    ___
+  |///|  |///|  |///|
+  |///|  |///|  |///|
+  |///|  |///|  |///|
+   ---    ---    ---
+
+
+
+    """
     clear_screen()
     print("""
    ___    ___    ___
@@ -46,6 +62,9 @@ def ascii_cards_backs():
     """)
 
 def card_shuffle(correct_card):
+    """Approximates the shuffling of the three cards
+     by printing to screen the movements of the Ace card
+     with a slight pause between each move."""
     for _ in range(10):
         ascii_cards_backs()
         print("\n\n\t")
@@ -79,6 +98,7 @@ def card_shuffle(correct_card):
     return correct_card
 
 def win_round(amount, correct_card):
+    """Player has won the round. Shows the cards face up, adds dollars to player money and displays congratulatory message.""""
     clear_screen()
     card_display_list = [' ', ' ', ' ']
     card_display_list[correct_card] = 'A'
@@ -91,6 +111,7 @@ def win_round(amount, correct_card):
 
 
 def lose_round(amount, correct_card):
+    """Player has lost the round. Shows the cards face up, subtracts dollars from player money and displays conciliatory message.""""
     clear_screen()
     card_display_list = [' ', ' ', ' ']
     card_display_list[correct_card] = 'A'
@@ -103,6 +124,8 @@ def lose_round(amount, correct_card):
 
 # this is the round loop
 def card_picking_loop():
+    """Loop that displays the cards' backs, fronts, then shuffles them around,
+    makes the player pick one, and determines if that was the correct pick."""
     while True:
         correct_card = random.randint(0, 2)
         card_display_list = [' ', ' ', ' ']
